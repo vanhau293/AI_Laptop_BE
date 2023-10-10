@@ -56,10 +56,13 @@ public class Laptop {
     private int hardDrive;
 
     @Column(name = "inch", nullable = false)
-    private double wideScreen;
+    private float wideScreen;
 
     @Column(name = "weight", nullable = false)
-    private double weight;
+    private float weight;
+
+    @Column(name = "rating_avg", nullable = false)
+    private float rating;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "laptop", cascade = CascadeType.ALL)
     private List<Review> reviewList;

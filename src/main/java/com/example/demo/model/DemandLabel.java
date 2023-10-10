@@ -17,7 +17,7 @@ import lombok.Setter;
 public class DemandLabel {
     @Id
     @Column(name = "label_id", nullable = false)
-    private Long labelId;
+    private int labelId;
 
     @Column(name = "label_name")
     private String labelName;
