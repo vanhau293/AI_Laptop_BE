@@ -36,6 +36,8 @@ public class LaptopRequest {
     @NotEmpty(message = "ram is required")
     private String ram;
 
+    private String binaryImage;
+
     @Column(name = "image")
     private String image;
 

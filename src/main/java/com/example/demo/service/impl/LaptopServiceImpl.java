@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 
+import com.example.demo.bean.ImageUtils;
 import com.example.demo.bean.APICallPython;
 import com.example.demo.model.Laptop;
 import com.example.demo.model.request.LaptopRequest;
@@ -24,6 +26,7 @@ import lombok.val;
 
 @Service
 public class LaptopServiceImpl implements LaptopService {
+    private static final String URL_IMG="src/main/java/com/example/demo/image/";
     @Autowired
     private LaptopRepository laptopRepository;
 
@@ -66,7 +69,7 @@ public class LaptopServiceImpl implements LaptopService {
                                     .block();
             int label;
             try {
-                label = Integer.parseInt(labelFromDemand);
+                label = Integer.parseInt(labelFromDemand.replace("\"",""));
             }
             catch (NumberFormatException e) {
                 label = 0;
@@ -93,6 +96,10 @@ public class LaptopServiceImpl implements LaptopService {
         newLaptop.setWeight(Float.valueOf(laptopRequest.getWeight()));
         newLaptop.setRating(0);
         newLaptop.setWideScreen(Float.valueOf(laptopRequest.getWideScreen()));
+        if( !Objects.isNull(laptopRequest) && !Objects.isNull(laptopRequest.getBinaryImage())){
+            ImageUtils.downloadImage(laptopRequest.getImage(),laptopRequest.getBinaryImage(), URL_IMG);
+        }
+        newLaptop.setImage(laptopRequest.getImage());
 
         //CALL TO PYTHON
         Map<String, String> laptopBody = new HashMap();
@@ -116,7 +123,7 @@ public class LaptopServiceImpl implements LaptopService {
                                        .block();
         int label;
         try {
-            label = Integer.parseInt(labelForLaptop);
+            label = Integer.parseInt(labelForLaptop.replace("\"",""));
         }
         catch (NumberFormatException e) {
             label = 0;

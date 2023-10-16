@@ -30,6 +30,9 @@ public class Laptop {
     @Column(name = "laptop_name", nullable = false)
     private String laptopName;
 
+    @Column(name = "image")
+    private String image;
+
     @ManyToOne
     @JoinColumn(referencedColumnName = "brand_id", name = "brand_id")
     private Brand brand;
