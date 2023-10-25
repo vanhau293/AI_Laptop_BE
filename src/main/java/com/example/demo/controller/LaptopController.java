@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,5 +34,15 @@ public class LaptopController {
     @PostMapping("")
     public ResponseEntity<?> addLaptop (@RequestBody LaptopRequest laptopRequest){
         return laptopService.addLaptop(laptopRequest);
+    }
+
+    @GetMapping("/{laptopId}")
+    public ResponseEntity<?> getLaptop (@PathVariable String laptopId){
+        return laptopService.getLaptop(laptopId);
+    }
+
+    @PutMapping("/{laptopId}")
+    public ResponseEntity<?> updateLaptop (@RequestBody LaptopRequest laptopRequest, @PathVariable String laptopId){
+        return laptopService.updateLaptop(laptopRequest, laptopId);
     }
 }

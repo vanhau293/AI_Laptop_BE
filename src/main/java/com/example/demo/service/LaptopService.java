@@ -10,4 +10,6 @@ import com.example.demo.model.request.LaptopRequest;
 public interface LaptopService {
     ResponseEntity<?> findLaptop(String labelId, String demand) throws URISyntaxException;
     ResponseEntity<?> addLaptop(LaptopRequest laptopRequest);
+    ResponseEntity<?> getLaptop(String laptopId);
+    ResponseEntity<?> updateLaptop(LaptopRequest laptopRequest, String laptopId);
 }

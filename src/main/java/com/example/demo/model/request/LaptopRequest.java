@@ -49,5 +49,8 @@ public class LaptopRequest {
 
     @NotEmpty(message = "wideScreen is required")
     private String weight;
+
+    @NotEmpty(message = "data is required")
+    private String data;
 }
 
